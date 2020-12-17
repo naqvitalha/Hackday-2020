@@ -1,29 +1,17 @@
-class singleThreadTest {
+export class SingleThreadTest {
   constructor() {
     this.from = 0;
-    this.to = 200000;
-    this.startTime = "";
-    this.result = document.getElementById("status");
+    this.to = 3900000;
   }
-  receivedWorkerMessage(event) {
-    this.showMsg(`Done! </br> your Score is ${Date.now() - this.startTime}`);
-  }
-  showMsg(msg) {
-    this.result.innerHTML = msg;
-  }
-  workerError() {}
   runTest(callback) {
-    this.startTime = Date.now();
+    const startTime = Date.now();
     var blob = new Blob([document.querySelector("#scriptTag").textContent]);
     var blobURL = window.URL.createObjectURL(blob);
 
     var worker = new Worker(blobURL);
-    worker.onmessage = this.receivedWorkerMessage.bind(this, callback);
-    worker.onerror = this.workerError;
-    worker.postMessage({ from: this.from, to: this.to, callback: callback });
+    worker.onmessage = (event) => {
+        callback(Math.floor(100000000 / (Date.now() - startTime)));
+    };
+    worker.postMessage({ from: this.from, to: this.to });
   }
 }
-let singleThreadTestObj = new singleThreadTest();
-singleThreadTestObj.runTest();
-
-module.exports = singleThreadTest;

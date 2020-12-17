@@ -3,6 +3,7 @@ import "./anim.css";
 import {RunPage} from "./RunPage";
 import {IOTest} from "../bench/IOTest";
 import {renderMaxPossibleObjects} from "../webgl";
+import { SingleThreadTest } from "../bench/SingleThreadTest";
 
 export class BenchRunPage extends Component {
   constructor(props, context) {
@@ -20,7 +21,7 @@ export class BenchRunPage extends Component {
         this.setState({
           testDone: [
             ...this.state.testDone,
-            { name: "IO", score: Math.floor(e) }
+            { name: "DISK", score: Math.floor(e) }
           ]
         });
         //invoke new tests
@@ -31,7 +32,19 @@ export class BenchRunPage extends Component {
               { name: "GPU", score: Math.floor(value) }
             ]
           })
-        })
+        }).then(()=> {
+          new SingleThreadTest().runTest((s) => {
+            this.setState({
+              testDone: [
+                ...this.state.testDone,
+                { name: "CPU", score: s }
+              ]
+            })
+            setTimeout(()=> {
+              //this.setState({phase: 3})
+            }, 4000)
+          });
+        });
       });
     });
   }
