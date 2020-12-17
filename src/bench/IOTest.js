@@ -1,3 +1,4 @@
+/* eslint-disable */
 export class IOTest {
   constructor(iter, onReady) {
     this.fourKB = this.generateData(4096);

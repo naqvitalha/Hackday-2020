@@ -33,7 +33,6 @@ export const Stats = function () {
     let beginTime = (performance || Date).now(), prevTime = beginTime, frames = 0;
     let count = 0;
     let trailCount = 0;
-    let prevAverage = -1;
     let currentFrameCount = -1;
     let increaseObjectsCallback = null;
     let stopFlag = false;
@@ -86,7 +85,6 @@ export const Stats = function () {
                     const currAvg = Math.round(currentFrameCount / 5);
                     currentFrameCount = 0;
                     if ((currAvg) > 50) {
-                        prevAverage = currAvg;
                         console.log('increase objects. currAvg=',currAvg)
                         increaseObjectsCallback()
                     }else{
