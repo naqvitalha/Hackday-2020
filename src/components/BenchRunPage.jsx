@@ -39,9 +39,9 @@ export class BenchRunPage extends Component {
                 ...this.state.testDone,
                 { name: "CPU", score: s }
               ]
-            })
+            });
             setTimeout(()=> {
-              //this.setState({phase: 3})
+              this.setState({phase: 3})
             }, 4000)
           });
         });
