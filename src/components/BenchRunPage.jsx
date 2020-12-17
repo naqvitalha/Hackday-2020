@@ -3,7 +3,7 @@ import "./anim.css";
 import {RunPage} from "./RunPage";
 import {IOTest} from "../bench/IOTest";
 import {renderMaxPossibleObjects} from "../webgl";
-import { SingleThreadTest } from "../bench/SingleThreadTest";
+import { SingleThreadCPUTest } from "../bench/SingleThreadCPUTest";
 
 export class BenchRunPage extends Component {
   constructor(props, context) {
@@ -33,7 +33,7 @@ export class BenchRunPage extends Component {
             ]
           })
         }).then(()=> {
-          new SingleThreadTest().runTest((s) => {
+          new SingleThreadCPUTest().runTest((s) => {
             this.setState({
               testDone: [
                 ...this.state.testDone,

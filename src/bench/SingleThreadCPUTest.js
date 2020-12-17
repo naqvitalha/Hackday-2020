@@ -1,4 +1,4 @@
-export class SingleThreadTest {
+export class SingleThreadCPUTest {
   constructor() {
     this.from = 0;
     this.to = 3900000;
