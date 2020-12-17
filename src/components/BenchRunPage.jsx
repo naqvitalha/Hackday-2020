@@ -14,6 +14,7 @@ export class BenchRunPage extends Component {
     this.testTriggered = false;
   }
   runTests() {
+    
     let io = new IOTest(100, () => {
       io.runAllMultiple(50, (e) => {
         this.setState({
@@ -24,7 +25,6 @@ export class BenchRunPage extends Component {
         });
         //invoke new tests
         renderMaxPossibleObjects().then(value => {
-          console.log('value', value)
           this.setState({
             testDone: [
               ...this.state.testDone,

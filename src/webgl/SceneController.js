@@ -37,7 +37,6 @@ export default class SceneController {
         if(stats.onNext){
             let onNext = function(){
                 this._guiData.objectCount *= 1.5
-                console.log('increased objects', this._guiData.objectCount)
                 this._scenes[this._guiData.scene].changeObjectCount(this._guiData.objectCount);
             };
             stats.onNext(onNext.bind(this))

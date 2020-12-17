@@ -10,8 +10,8 @@ export default class IScene {
 	}
 
 	start(objectCount) {
-		console.log(`Scene Changed: ${this.title}`);
-		console.log(this.description);
+		//console.log(`Scene Changed: ${this.title}`);
+		//console.log(this.description);
 
 		this._app.ticker.add(this._update, this);
 

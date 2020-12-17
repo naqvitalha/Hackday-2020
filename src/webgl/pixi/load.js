@@ -30,7 +30,7 @@ export default function loadPixi(stats, gui) {
 
 	loadScript(libUrl)
 		.catch(() => {
-			console.log(`Could not load Pixi\n[${guiData.version}] from [${libUrl}]\nMay not be a valid version`);
+			//console.log(`Could not load Pixi\n[${guiData.version}] from [${libUrl}]\nMay not be a valid version`);
 		})
 		.then(() => {
 			if (window.PIXI) {
