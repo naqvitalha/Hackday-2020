@@ -15,7 +15,7 @@ export function renderMaxPossibleObjects() {
 
         const libUrl = `https://pixijs.download/v5.3.3/pixi.min.js`;
         loadScript(libUrl).then((value) => {
-            console.log("script loaded!");
+            // console.log("script loaded!");
             pollyfillPixi();
 
             function cb() {
@@ -23,8 +23,6 @@ export function renderMaxPossibleObjects() {
 
             const app = new App(cb, stats);
             new SceneController(app, stats, {});
-            // frameDiv.style.visibility = "visible";
-
         })
 
         stats.onDone((maxObjects) => {

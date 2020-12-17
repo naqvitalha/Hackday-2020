@@ -37,12 +37,14 @@ export const Stats = function () {
     let increaseObjectsCallback = null;
     let stopFlag = false;
     let onDoneListeners = [];
+    let totalFps = 0;
+    let totalFpsMeasures = 0;
     return {
 
-        onNext: function(_listener){
+        onNext: function (_listener) {
             increaseObjectsCallback = _listener
         },
-        onDone: function(_listener){
+        onDone: function (_listener) {
             onDoneListeners.push(_listener)
         },
 
@@ -71,8 +73,9 @@ export const Stats = function () {
 
             if (time > prevTime + 1000) {
                 let fps = (frames * 1000) / (time - prevTime);
-                console.log('fps', fps)
-
+                // console.log('fps', fps)
+                totalFps += fps
+                totalFpsMeasures++
                 prevTime = time;
                 frames = 0;
 
@@ -85,12 +88,12 @@ export const Stats = function () {
                     const currAvg = Math.round(currentFrameCount / 5);
                     currentFrameCount = 0;
                     if ((currAvg) > 50) {
-                        console.log('increase objects. currAvg=',currAvg)
+                        // console.log('increase objects. currAvg=', currAvg)
                         increaseObjectsCallback()
-                    }else{
-                        console.log('stop. trailCount = '+trailCount)
+                    } else {
                         stopFlag = true
-                        onDoneListeners.forEach(onDoneListener => onDoneListener(trailCount))
+                        const score = Math.round((totalFps/totalFpsMeasures) * 100/60 * trailCount)
+                        onDoneListeners.forEach(onDoneListener => onDoneListener(score))
                     }
                 }
             }
