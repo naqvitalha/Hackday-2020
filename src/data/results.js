@@ -5,7 +5,7 @@ export const results = {
     ],
     io : [
         { model: "Pixel 4a", score: 6000 },
-        { model: "Samsung S10 Lite", score: 3911 }
+        { model: "Samsung S10 Lite", score: 3496 }
     ],
     webgl: [
         { model: "Pixel 4a", score: 6000 },
