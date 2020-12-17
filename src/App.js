@@ -1,5 +1,5 @@
 import React from "react";
-import { BenchRunPage } from "./components/BenchRunPage";
+import {BenchRunPage} from "./components/BenchRunPage";
 import "./styles.css";
 
 export default function App() {

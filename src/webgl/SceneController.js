@@ -1,5 +1,3 @@
-import storage from './storage.js';
-
 import pixiScenes from './pixi/scenes.js'
 
 export default class SceneController {

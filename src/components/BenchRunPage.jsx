@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./anim.css";
-import { RunPage } from "./RunPage";
-import { IOTest } from "../bench/IOTest";
+import {RunPage} from "./RunPage";
+import {IOTest} from "../bench/IOTest";
 
 export class BenchRunPage extends Component {
   constructor(props, context) {

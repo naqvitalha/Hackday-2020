@@ -1,6 +1,6 @@
-import { loadScript, pollyfillPixi } from "./utils";
-import { Stats } from "./stats";
-import { App } from "./app";
+import {loadScript, pollyfillPixi} from "./utils";
+import {Stats} from "./stats";
+import {App} from "./app";
 import SceneController from "./SceneController";
 
 export function init() {
