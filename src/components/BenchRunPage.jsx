@@ -4,6 +4,7 @@ import {RunPage} from "./RunPage";
 import {IOTest} from "../bench/IOTest";
 import {renderMaxPossibleObjects} from "../webgl";
 import { SingleThreadCPUTest } from "../bench/SingleThreadCPUTest";
+import ReportPage from "./ReportPage";
 
 export class BenchRunPage extends Component {
   constructor(props, context) {
@@ -16,8 +17,8 @@ export class BenchRunPage extends Component {
   }
   runTests() {
     
-    let io = new IOTest(100, () => {
-      io.runAllMultiple(50, (e) => {
+    let io = new IOTest(10, () => {
+      io.runAllMultiple(1, (e) => {
         this.setState({
           testDone: [
             ...this.state.testDone,
@@ -117,13 +118,31 @@ export class BenchRunPage extends Component {
       </div>
     );
   }
+
+  renderPhase3 = () => {
+    const {testDone} = this.state;
+    let gpu;
+    let cpu;
+    let disk;
+    testDone.forEach(value => {
+      if (value.name === 'CPU') {
+        cpu = value
+      } else if (value.name === 'GPU') {
+        gpu = value
+      } else if (value.name === 'DISK') {
+        disk = value
+      }
+    })
+    return <ReportPage reportData={{data: {cpu, gpu, disk}}}/>
+  }
+
   render() {
     if (this.state.phase === 0) {
       return this.renderPhase0();
     } else if (this.state.phase === 1) {
       return this.renderPhase1();
     } else if (this.state.phase === 3) {
-      // load the final component
+      return this.renderPhase3();
     }
   }
 }
