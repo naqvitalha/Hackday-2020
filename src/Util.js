@@ -14,6 +14,6 @@ export const mapScore = (entries, entry) => {
 export function parseUserAgent(userAgentString = window.navigator.userAgent) {
     let start = userAgentString.indexOf('(')
     let end = userAgentString.indexOf(')')
-    const [os, version, model] = userAgentString.substring(start + 1, end).split('; ')
+    const [os, version, model='test'] = userAgentString.substring(start + 1, end).split('; ')
     return {os, version, model}
 }

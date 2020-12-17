@@ -73,11 +73,12 @@ function ReportPage({reportData, deviceInfo}) {
 
     let {cpu, gpu, disk} = data
     console.log('results.cpu', results.cpu)
-    const allCpu = mapScore(results.cpu, {...cpu, model})
-    const allGpu = mapScore(results.webgl, {...gpu, model})
-    const allDisk = mapScore(results.io, {...disk, model})
-    console.log('{cpu, gpu, disk}', {cpu, gpu, disk})
-    console.log('{allCpu, allGpu, allDisk}', {allCpu, allGpu, allDisk})
+    const allCpu = mapScore(results.cpu, {...cpu, model, isUserDevice: true})
+    const allGpu = mapScore(results.webgl, {...gpu, model, isUserDevice: true})
+    const allDisk = mapScore(results.io, {...disk, model, isUserDevice: true})
+    const cpuPercentile = allCpu.find(val => val.isUserDevice).score
+    const gpuPercentile = allGpu.find(val => val.isUserDevice).score
+    const diskPercentile = allDisk.find(val => val.isUserDevice).score
 
     return <div>
         <div>Report</div>
@@ -94,9 +95,9 @@ function ReportPage({reportData, deviceInfo}) {
 
         <div>Details</div>
         <div style={styles.reportRow}>
-            <ReportItem name={"CPU"} value={cpu.score} icon={"/chip.png"} percentile={50}/>
-            <ReportItem name={"GPU"} value={gpu.score} icon={"/chip.png"} percentile={50}/>
-            <ReportItem name={"Disk"} value={disk.score} icon={"/disk.png"} percentile={50}/>
+            <ReportItem name={"CPU"} value={cpu.score} icon={"/chip.png"} percentile={cpuPercentile}/>
+            <ReportItem name={"GPU"} value={gpu.score} icon={"/chip.png"} percentile={gpuPercentile}/>
+            <ReportItem name={"Disk"} value={disk.score} icon={"/disk.png"} percentile={diskPercentile}/>
         </div>
 
         <div style={styles.valueComparison}>
