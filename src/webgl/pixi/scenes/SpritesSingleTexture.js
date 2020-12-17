@@ -11,7 +11,7 @@ export default class SpritesSingleTexture extends IScene {
 
   _create(objectCount) {
     for (let i = this._children.length; i < objectCount; ++i) {
-      const sprite = PIXI.Sprite.from(
+      const sprite = window.PIXI.Sprite.from(
         "https://firebasestorage.googleapis.com/v0/b/hack10-7130f.appspot.com/o/images%2Fbunny1.png?alt=media"
       );
       sprite.anchor.set(0.5);

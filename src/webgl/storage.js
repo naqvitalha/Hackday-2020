@@ -1,4 +1,4 @@
-const url = new URL(`${location.protocol}//${location.host}${location.pathname}${window.location.search}`);
+const url = new URL(`${window.location.protocol}//${window.location.host}${window.location.pathname}${window.window.location.search}`);
 
 export default {
 	url: () => {

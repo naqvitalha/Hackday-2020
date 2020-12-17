@@ -16,7 +16,7 @@ export default class CanvasTextStatic extends IScene {
 	_create(objectCount) {
 		for (let i = this._children.length; i < objectCount; ++i) {
 			const color = this._colors[this._children.length % this._colors.length];
-			const text = new PIXI.Text('WebGL', {
+			const text = new window.PIXI.Text('WebGL', {
 				fontFamily: 'Arial',
 				fontSize: 30,
 				font: '30px Arial', // for backwards compatibility with v3

@@ -13,7 +13,7 @@ export default class GraphicsComplex extends IScene {
 	_create(objectCount) {
 		for (let i = this._children.length; i < objectCount; ++i) {
 			const color = this._colors[this._children.length % this._colors.length];
-			const graphic = new PIXI.Graphics();
+			const graphic = new window.PIXI.Graphics();
 			graphic.beginFill(color);
 
 			const type = this._children.length % 4;

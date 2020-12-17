@@ -13,7 +13,7 @@ export default class GraphicsSimple extends IScene {
 	_create(objectCount) {
 		for (let i = this._children.length; i < objectCount; ++i) {
 			const color = this._colors[this._children.length % this._colors.length];
-			const graphic = new PIXI.Graphics();
+			const graphic = new window.PIXI.Graphics();
 			graphic.beginFill(color);
 			graphic.drawRect(-15, -15, 30, 30);
 			graphic.position.set(Math.random() * this._app.screen.width, Math.random() * this._app.screen.height);

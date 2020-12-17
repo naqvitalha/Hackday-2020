@@ -12,7 +12,7 @@ export default class BitmapTextStatic extends IScene {
 
 	_create(objectCount) {
 		for (let i = this._children.length; i < objectCount; ++i) {
-			const text = new PIXI.extras.BitmapText('WebGL', {
+			const text = new window.PIXI.extras.BitmapText('WebGL', {
 				font: '35px Desyrel',
 				align: 'center'
 			});

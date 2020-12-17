@@ -15,14 +15,14 @@ export default class SpritesAndGraphics extends IScene {
 	_create(objectCount) {
 		for (let i = this._children.length; i < objectCount; ++i) {
 			if (i % 20 < 7) {
-				const sprite = PIXI.Sprite.from(`images/bunny${this._bunnyIndex}.png`);
+				const sprite =window.PIXI.Sprite.from(`images/bunny${this._bunnyIndex}.png`);
 				this._bunnyIndex === 12 ? this._bunnyIndex = 1 : ++this._bunnyIndex;
 				sprite.anchor.set(0.5);
 				sprite.position.set(Math.random() * this._app.screen.width, Math.random() * this._app.screen.height);
 
 				this._app.stage.addChild(sprite);
 			} else if (i % 20 < 14) {
-				const sprite = PIXI.Sprite.from(`spritesheets/bunny${this._bunnyIndex}.png`);
+				const sprite =window.PIXI.Sprite.from(`spritesheets/bunny${this._bunnyIndex}.png`);
 				this._bunnyIndex === 12 ? this._bunnyIndex = 1 : ++this._bunnyIndex;
 				sprite.anchor.set(0.5);
 				sprite.position.set(Math.random() * this._app.screen.width, Math.random() * this._app.screen.height);
@@ -30,7 +30,7 @@ export default class SpritesAndGraphics extends IScene {
 				this._app.stage.addChild(sprite);
 			} else if ( i % 20 < 18 ) {
 				const color = this._colors[this._children.length % this._colors.length];
-				const graphic = new PIXI.Graphics();
+				const graphic = new window.PIXI.Graphics();
 				graphic.beginFill(color);
 				graphic.drawRect(-15, -15, 30, 30);
 				graphic.position.set(Math.random() * this._app.screen.width, Math.random() * this._app.screen.height);
@@ -38,7 +38,7 @@ export default class SpritesAndGraphics extends IScene {
 				this._app.stage.addChild(graphic);
 			} else {
 				const color = this._colors[this._children.length % this._colors.length];
-				const graphic = new PIXI.Graphics();
+				const graphic = new window.PIXI.Graphics();
 				graphic.beginFill(color);
 
 				if (this._shapeIndex === 0) {

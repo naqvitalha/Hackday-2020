@@ -30,7 +30,7 @@ export default class BitmapTextCounting extends IScene {
 		}
 
 		for (let i = this._children.length; i < objectCount; ++i) {
-			const text = new PIXI.BitmapText('WebGL', {
+			const text = new window.PIXI.BitmapText('WebGL', {
 				font: '35px Desyrel',
 				align: 'center'
 			});

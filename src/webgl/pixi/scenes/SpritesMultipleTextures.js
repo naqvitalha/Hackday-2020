@@ -14,7 +14,7 @@ export default class SpritesMultipleTextures extends IScene {
 
 	_create(objectCount) {
 		for (let i = this._children.length; i < objectCount; ++i) {
-			const sprite = PIXI.Sprite.from(`images/bunny${this._bunnyIndex}.png`);
+			const sprite =window.PIXI.Sprite.from(`images/bunny${this._bunnyIndex}.png`);
 			this._bunnyIndex === 12 ? this._bunnyIndex = 1 : ++this._bunnyIndex;
 			sprite.anchor.set(0.5);
 			sprite.position.set(Math.random() * this._app.screen.width, Math.random() * this._app.screen.height);
