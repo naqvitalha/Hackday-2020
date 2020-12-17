@@ -8,8 +8,8 @@ export class IOTest {
   }
 
   generateData(length) {
-    var result = [length];
-    for (var i = 0; i < length; i++) {
+    const result = [length];
+    for (let i = 0; i < length; i++) {
       result[i] = String.fromCharCode(Math.floor(Math.random() * 126));
     }
     return result.join("");
@@ -75,7 +75,7 @@ export class IOTest {
 
 class StorageModule {
   constructor(onReady) {
-    var request = indexedDB.open("IOTestDB");
+    const request = indexedDB.open("IOTestDB");
     request.onerror = function (event) {
       onReady(false);
     };

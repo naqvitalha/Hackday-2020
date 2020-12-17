@@ -1,8 +1,8 @@
 export const Stats = function () {
 
-    var mode = 0;
+    let mode = 0;
 
-    var container = document.createElement('div');
+    const container = document.createElement('div');
     container.style.cssText = 'cursor:pointer;opacity:0.9';
     container.addEventListener('click', function (event) {
 
@@ -20,7 +20,7 @@ export const Stats = function () {
 
     function showPanel(id) {
 
-        for (var i = 0; i < container.children.length; i++) {
+        for (let i = 0; i < container.children.length; i++) {
 
             container.children[i].style.display = i === id ? 'block' : 'none';
 
@@ -30,14 +30,14 @@ export const Stats = function () {
 
     }
 
-    var beginTime = (performance || Date).now(), prevTime = beginTime, frames = 0;
-    var count = 0;
-    var trailCount = 0;
-    var prevAverage = -1;
-    var currentFrameCount = -1;
-    var increaseObjectsCallback = null;
-    var stopFlag = false;
-    var onDone = null;
+    let beginTime = (performance || Date).now(), prevTime = beginTime, frames = 0;
+    let count = 0;
+    let trailCount = 0;
+    let prevAverage = -1;
+    let currentFrameCount = -1;
+    let increaseObjectsCallback = null;
+    let stopFlag = false;
+    let onDone = null;
     return {
 
         onNext: function(_listener){
@@ -67,7 +67,7 @@ export const Stats = function () {
                 return;
             }
             frames++;
-            var time = (performance || Date).now();
+            const time = (performance || Date).now();
 
 
             if (time > prevTime + 1000) {
@@ -83,7 +83,7 @@ export const Stats = function () {
                 if (count === 5) {
                     count = 0;
                     trailCount++;
-                    var currAvg = Math.round(currentFrameCount / 5);
+                    const currAvg = Math.round(currentFrameCount / 5);
                     currentFrameCount = 0;
                     if ((currAvg) > 50) {
                         prevAverage = currAvg;
@@ -110,20 +110,21 @@ export const Stats = function () {
 
 Stats.Panel = function (name, fg, bg) {
 
-    var min = Infinity, max = 0, round = Math.round;
-    var PR = round(window.devicePixelRatio || 1);
+    let min = Infinity, max = 0;
+    const round = Math.round;
+    const PR = round(window.devicePixelRatio || 1);
 
-    var WIDTH = 80 * PR, HEIGHT = 48 * PR,
+    const WIDTH = 80 * PR, HEIGHT = 48 * PR,
         TEXT_X = 3 * PR, TEXT_Y = 2 * PR,
         GRAPH_X = 3 * PR, GRAPH_Y = 15 * PR,
         GRAPH_WIDTH = 74 * PR, GRAPH_HEIGHT = 30 * PR;
 
-    var canvas = document.createElement('canvas');
+    const canvas = document.createElement('canvas');
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
     canvas.style.cssText = 'width:80px;height:48px';
 
-    var context = canvas.getContext('2d');
+    const context = canvas.getContext('2d');
     context.font = 'bold ' + (9 * PR) + 'px Helvetica,Arial,sans-serif';
     context.textBaseline = 'top';
 
