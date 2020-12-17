@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import "./anim.css";
 import {RunPage} from "./RunPage";
 import {IOTest} from "../bench/IOTest";
+import {renderMaxPossibleObjects} from "../webgl";
 
 export class BenchRunPage extends Component {
   constructor(props, context) {
@@ -14,7 +15,7 @@ export class BenchRunPage extends Component {
   }
   runTests() {
     let io = new IOTest(100, () => {
-      io.runAllMultiple(50, (e) => {
+      io.runAllMultiple(1, (e) => {
         this.setState({
           testDone: [
             ...this.state.testDone,
@@ -22,6 +23,15 @@ export class BenchRunPage extends Component {
           ]
         });
         //invoke new tests
+        renderMaxPossibleObjects().then(value => {
+          console.log('value', value)
+          this.setState({
+            testDone: [
+              ...this.state.testDone,
+              { name: "GPU", score: Math.floor(value) }
+            ]
+          })
+        })
       });
     });
   }

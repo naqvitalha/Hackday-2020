@@ -36,14 +36,14 @@ export const Stats = function () {
     let currentFrameCount = -1;
     let increaseObjectsCallback = null;
     let stopFlag = false;
-    let onDone = null;
+    let onDoneListeners = [];
     return {
 
         onNext: function(_listener){
             increaseObjectsCallback = _listener
         },
         onDone: function(_listener){
-            onDone = _listener
+            onDoneListeners.push(_listener)
         },
 
         REVISION: 16,
@@ -90,7 +90,7 @@ export const Stats = function () {
                     }else{
                         console.log('stop. trailCount = '+trailCount)
                         stopFlag = true
-                        onDone()
+                        onDoneListeners.forEach(onDoneListener => onDoneListener(trailCount))
                     }
                 }
             }
