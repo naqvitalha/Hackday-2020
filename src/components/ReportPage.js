@@ -89,7 +89,7 @@ function ReportPage({reportData, deviceInfo}) {
     overall.forEach((metric)=>{
         maxScore = Math.max(maxScore, metric.overallScore)
     })
-    console.log('overall', overall, maxScore)
+    //console.log('overall', overall, maxScore)
     return <div>
         <div>Report</div>
         <div style={styles.deviceInfoContainer}>
