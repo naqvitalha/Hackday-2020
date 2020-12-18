@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import {mapScore, parseUserAgent} from "../Util";
+import {groupByModel, mapScore, parseUserAgent} from "../Util";
 import {results} from "../data/results";
 
 function ReportItem({name, value, icon, percentile}) {
@@ -17,9 +17,9 @@ function ReportItem({name, value, icon, percentile}) {
 
 }
 
-function HorizontalBar({value, text}) {
+function HorizontalBar({value, text, maxScore, isUserDevice}) {
     return <div style={{
-        width: 450,
+        width: '100%',
         height: 48,
         marginTop: 8,
         marginBottom: 8,
@@ -47,21 +47,26 @@ function HorizontalBar({value, text}) {
             display: 'flex',
             lineHeight: '48px',
             paddingLeft: 24,
+            paddingRight: 8,
             textAlign: 'left',
             color: 'black'
         }}>{value}</div>
+
         <div style={{
             border: '1px black solid',
-            width: (400 / 100) * value,
+            width: (window.screen.width * .8 ) * (value / maxScore),
             height: 48,
+            backgroundColor: isUserDevice ? "#e4ff98" : "#98c1ff",
+            opacity: 0.5,
+            borderRadius: "2px",
             marginTop: 8,
             marginBottom: 8,
         }}/>
+
     </div>
 }
 
 function ReportPage({reportData, deviceInfo}) {
-    console.log('reportData')
     const {model} = parseUserAgent()
     const {deviceName = model} = deviceInfo || {}
     const dummyComparisons = [
@@ -72,7 +77,6 @@ function ReportPage({reportData, deviceInfo}) {
     const {otherPhones = dummyComparisons, data} = reportData || {};
 
     let {cpu, gpu, disk} = data
-    console.log('results.cpu', results.cpu)
     const allCpu = mapScore(results.cpu, {...cpu, model, isUserDevice: true})
     const allGpu = mapScore(results.webgl, {...gpu, model, isUserDevice: true})
     const allDisk = mapScore(results.io, {...disk, model, isUserDevice: true})
@@ -80,6 +84,12 @@ function ReportPage({reportData, deviceInfo}) {
     const gpuPercentile = allGpu.find(val => val.isUserDevice).score
     const diskPercentile = allDisk.find(val => val.isUserDevice).score
 
+    const overall = groupByModel({cpu: allCpu, gpu: allGpu, disk: allDisk})
+    let maxScore = -1;
+    overall.forEach((metric)=>{
+        maxScore = Math.max(maxScore, metric.overallScore)
+    })
+    console.log('overall', overall, maxScore)
     return <div>
         <div>Report</div>
         <div style={styles.deviceInfoContainer}>
@@ -88,8 +98,8 @@ function ReportPage({reportData, deviceInfo}) {
         <div>Phone Report</div>
 
         <div>
-            {otherPhones.map(value => (
-                <HorizontalBar value={value.score} text={value.name}/>
+            {overall.map(value => (
+                <HorizontalBar maxScore={maxScore} value={value.overallScore} text={value.model} isUserDevice={value.isUserDevice}/>
             ))}
         </div>
 
@@ -106,10 +116,10 @@ function ReportPage({reportData, deviceInfo}) {
         </div>
 
         <div
-            style={{padding: 12}}
+            style={styles.actionBtn}
             onClick={() => {
-            window.location.href = 'https://www.flipkart.com/search?q=mobile&marketplace=FLIPKART&p%5B%5D=facets.price_range%255B%255D%3DRs.%2B18001%2B-%2BRs.%2B35000&p%5B%5D=facets.rating%255B%255D%3D4%25E2%2598%2585%2B%2526%2Babove&p%5B%5D=facets.price_range%255B%255D%3DRs.%2B25001%2B-%2BRs.%2B35000&pageUID=1608235350520'
-        }}>
+                window.location.href = 'https://www.flipkart.com/search?q=mobile&marketplace=FLIPKART&p%5B%5D=facets.price_range%255B%255D%3DRs.%2B18001%2B-%2BRs.%2B35000&p%5B%5D=facets.rating%255B%255D%3D4%25E2%2598%2585%2B%2526%2Babove&p%5B%5D=facets.price_range%255B%255D%3DRs.%2B25001%2B-%2BRs.%2B35000&pageUID=1608235350520'
+            }}>
             Click Here to upgrade your phone
         </div>
     </div>
@@ -117,6 +127,15 @@ function ReportPage({reportData, deviceInfo}) {
 
 
 const styles = {
+    actionBtn: {
+        padding: "16px 16px",
+        backgroundColor: "#2874F0",
+        borderRadius: "7px",
+        display: "inline-block",
+        width: "80%",
+        marginTop: "12px",
+        color: "white"
+    },
     reportRow: {
         display: 'flex',
         flexDirection: 'column',
