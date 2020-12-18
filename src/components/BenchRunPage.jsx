@@ -17,8 +17,8 @@ export class BenchRunPage extends Component {
   }
   runTests() {
     
-    let io = new IOTest(10, () => {
-      io.runAllMultiple(1, (e) => {
+    let io = new IOTest(100, () => {
+      io.runAllMultiple(50, (e) => {
         this.setState({
           testDone: [
             ...this.state.testDone,
