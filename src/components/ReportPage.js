@@ -11,7 +11,7 @@ function ReportItem({name, value, icon, percentile}) {
         <div>{name}</div>
         <div>{value}</div>
         <div>
-            Slower than {percentile}% of phone
+            Slower than {(100-percentile)}% of phone
         </div>
     </div>
 
