@@ -120,7 +120,7 @@ function ReportPage({reportData, deviceInfo}) {
             onClick={() => {
                 window.location.href = 'https://www.flipkart.com/search?q=mobile&marketplace=FLIPKART&p%5B%5D=facets.price_range%255B%255D%3DRs.%2B18001%2B-%2BRs.%2B35000&p%5B%5D=facets.rating%255B%255D%3D4%25E2%2598%2585%2B%2526%2Babove&p%5B%5D=facets.price_range%255B%255D%3DRs.%2B25001%2B-%2BRs.%2B35000&pageUID=1608235350520'
             }}>
-            Click Here to upgrade your phone
+            Explore New Phones
         </div>
     </div>
 }
